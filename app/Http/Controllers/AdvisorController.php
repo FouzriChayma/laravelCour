@@ -6,67 +6,21 @@ use Illuminate\Http\Request;
 
 class AdvisorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(Request $request)
     {
-        $age = $request->query('age');
-        $interet = $request->query('interet', 'general'); //  par deeef 'general'
-        
-        //  validation basique aalkhr (age required and numeric)
-        $request->validate([
-            'age' => 'required|integer|min:0',
-        ]);
+        $age = $request->query('age');  // Required, but we'll validate in middleware
+        $interet = $request->query('interet', 'non spécifié');  // Optional, default value
 
-        return view('advisor.show', compact('age', 'interet'));
-    }
+        // Simple logic for personalized message (customize as needed)
+        $message = "Bonjour! À {$age} ans, ";
+        if ($interet === 'developpement') {
+            $message .= "nous vous conseillons de vous spécialiser en Laravel pour booster votre carrière.";
+        } elseif ($age > 30) {
+            $message .= "considérez une reconversion professionnelle si votre intérêt est {$interet}.";
+        } else {
+            $message .= "explorez {$interet} pour gagner en expérience.";
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return view('show', compact('message', 'age', 'interet'));
     }
 }

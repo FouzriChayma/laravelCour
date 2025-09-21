@@ -74,6 +74,6 @@ Route::get('/dashboard', function () {
 /////////////////////////////////////////////
 //Atelier 2
 
-Route::get('/advisor/{age?}', [AdvisorController::class, 'show'])->name('advisor.show');
 
-
+Route::get('/advisor', [AdvisorController::class, 'show'])->name('advisor')->middleware('check.age');
+Route::view('/acces-refuse', 'acces-refuse');
