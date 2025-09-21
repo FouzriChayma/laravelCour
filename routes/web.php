@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\AdvisorController;
+use App\Http\Controllers\ArticleController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -74,6 +75,9 @@ Route::get('/dashboard', function () {
 /////////////////////////////////////////////
 //Atelier 2
 
-
+//ex1
 Route::get('/advisor', [AdvisorController::class, 'show'])->name('advisor')->middleware('check.age');
 Route::view('/acces-refuse', 'acces-refuse');
+//ex2
+
+Route::get('/articles', [ArticleController::class, 'index']);
