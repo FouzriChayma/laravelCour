@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\AdvisorController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -64,4 +65,15 @@ Route::match(['get', 'post'], '/formulaire', function () {
 
 // Route utilisant un contrôleur
 Route::get('/greetWithcontroller/{name}', [WelcomeController::class, 'index']);
+
+//////////////////////////////////////////////
+//Annexe Intégration Template 
+Route::get('/dashboard', function () {
+    return view('pages.dashboard');
+})->name('dashboard');
+/////////////////////////////////////////////
+//Atelier 2
+
+Route::get('/advisor/{age?}', [AdvisorController::class, 'show'])->name('advisor.show');
+
 
